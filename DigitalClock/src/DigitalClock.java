@@ -28,8 +28,10 @@ public class DigitalClock extends javax.swing.JFrame {
         Date datum = new Date();
         SimpleDateFormat s1 = new SimpleDateFormat("yyyy-MM-dd");
         date.setText(s1.format(datum));
-        SimpleDateFormat s2 = new SimpleDateFormat("hh:mm:ss");
-        time.setText(s2.format(datum));
+        
+        time t = new time();
+        t.start();
+        
     }
 
     /**
@@ -214,6 +216,8 @@ public class DigitalClock extends javax.swing.JFrame {
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         // TODO add your handling code here:
         string="Reset";
+        stop.setEnabled(false);
+        start.setEnabled(true);
     }//GEN-LAST:event_resetActionPerformed
 
     /**
@@ -311,6 +315,25 @@ class watch extends Thread
     }
     
     
+}
+class time extends Thread
+{
+    public void run()
+    {
+        for(;;)
+        {
+            try
+            {
+                Date datum = new Date();
+                SimpleDateFormat s2 = new SimpleDateFormat("hh:mm:ss a");
+            time.setText(s2.format(datum));
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton date;
